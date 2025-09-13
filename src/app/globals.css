@@ -971,6 +971,8 @@ body.menu-open {
   }
 
   .hero__mob-bottom-text {
+    position: relative;
+    z-index: 999;
     color: #8b8b8b;
     font-size: 12px;
     line-height: 10.91px;
