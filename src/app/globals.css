@@ -226,7 +226,7 @@ body.menu-open {
   width: 100%;
   object-fit: contain;
   right: -160px;
-  bottom: -200px;
+  bottom: -210px;
 }
 
 .hero__info {
@@ -498,6 +498,7 @@ body.menu-open {
 
 .form__inp,
 .form__massage {
+    font-family: sans-serif;
   width: 100%;
   padding: 3px 3px 17px;
   border: none;
