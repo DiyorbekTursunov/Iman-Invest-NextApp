@@ -75,7 +75,7 @@ export const translations: Record<Language, Translations> = {
       text: "IMAN'da biz nafaqat innovatsion moliyaviy mahsulotlar yaratishga, balki bizga ishonch bildirgan har bir inson bilan shaffof va halol munosabatlar o'rnatishga intilamiz. Bizning jamoamiz o'z sohasining mutaxassislari bo'lib, men ularga chuqur ishonaman va hurmat qilaman. Shu bilan birga, shaxsiy e'tiborimni talab qiladigan vaziyatlar uchun men alohida aloqa kanalini ochishga qaror qildim.\n\nBizning ishonchimiz komilki, uzoq muddatli muvaffaqiyat faqat halollik, ishonch va mas'uliyat tamoyillariga asoslangan holda erishilishi mumkin. Men shaxsan IMAN faoliyati ushbu qadriyatlar va kompaniya missiyasiga — axloqiy moliya tizimini rivojlantirishga — doimo mos bo'lishini ta'minlayman.\n\nAgar siz ushbu tamoyillar buzilgan deb hisoblasangiz yoki biz bilan muloqot jarayonida adolatsizlikka duch kelgan bo'lsangiz, iltimos, quyidagi havola orqali shaklni to'ldirib bizga xabar bering.",
       signature: {
         name: "Rahmatov Rustam",
-        position: "CEO of IMAN",
+        position: "Co-founder & GCEO at IMAN",
       },
     },
     form: {
@@ -198,13 +198,13 @@ export const translations: Record<Language, Translations> = {
       text: "At IMAN, we strive not only to create innovative financial products, but also to build transparent and honest relationships with everyone who places their trust in us. Our team consists of true professionals, whom I deeply trust and respect. At the same time, for situations requiring my personal attention, I decided to open a separate communication channel.\n\nWe firmly believe that long-term success can only be achieved based on the principles of honesty, trust, and responsibility. I personally ensure that IMAN’s activities always align with these values and the company’s mission — developing an ethical financial system.\n\nIf you believe these principles have been violated, or you have faced injustice in your communication with us, please fill out the form at the link below and let us know.",
       signature: {
         name: "Rustam Rahmatov",
-        position: "CEO of IMAN",
+        position: "Co-founder & GCEO at IMAN",
       },
     },
     form: {
       title: "Send Your Appeal",
       description:
-        "I guarantee personal review of every appeal.\n\nP.S. Please contact us only with meaningful inquiries.\n\nMessages not related to business activities will not be considered.\n\nRespectfully,\n<b>Rustam Rahmatov</b>\n\nCo-founder and CEO of IMAN",
+        "I guarantee personal review of every appeal.\n\nP.S. Please contact us only with meaningful inquiries.\n\nMessages not related to business activities will not be considered.\n\nRespectfully,\n<b>Rustam Rahmatov</b>\n\nCo-founder and Co-founder & GCEO at IMAN",
       tabs: {
         client: "Client",
         company: "Company",
@@ -228,7 +228,7 @@ export const translations: Record<Language, Translations> = {
         title: "Your appeal has been successfully sent!",
       },
       footer:
-        "I guarantee personal review of every appeal.\n\nP.S. Please contact us only with meaningful inquiries. Messages not related to business activities will not be considered.\n\nRespectfully,\nRustam Rahmatov\n\nCo-founder and CEO of IMAN",
+        "I guarantee personal review of every appeal.\n\nP.S. Please contact us only with meaningful inquiries. Messages not related to business activities will not be considered.\n\nRespectfully,\nRustam Rahmatov\n\nCo-founder and Co-founder & GCEO at IMAN",
     },
     footer: {
       title: "Contact Information",
