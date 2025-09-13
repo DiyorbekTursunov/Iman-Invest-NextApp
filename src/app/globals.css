@@ -280,7 +280,6 @@ body.menu-open {
   /* bottom: 30px;
   right: -50px; */
   padding-bottom: 15px;
-  display: none;
 }
 
 .hero__name-title {
@@ -565,7 +564,7 @@ body.menu-open {
 .footer-title {
   font-family: Tenor Sans;
   font-weight: 400;
-  font-size: 35px;
+  font-size: 28px;
   line-height: 100%;
   vertical-align: middle;
   text-transform: uppercase;
@@ -577,13 +576,13 @@ body.menu-open {
   display: flex;
   align-items: start;
   gap: 85px;
-  margin-bottom: 70px;
+  margin-bottom: 40px;
 }
 
 .footer-cards-title {
   font-family: Tenor Sans, sans-serif;
   font-weight: 300;
-  font-size: 28.17px;
+  font-size: 22.17px;
   line-height: 100%;
   vertical-align: middle;
   /* color: #fff; */
@@ -594,7 +593,7 @@ body.menu-open {
   font-family: Tenor Sans, sans-serif;
   font-weight: 400;
   font-style: Regular;
-  font-size: 28.17px;
+  font-size: 24.17px;
   line-height: 100%;
   vertical-align: middle;
   margin-bottom: 19px;
@@ -603,7 +602,7 @@ body.menu-open {
 
 .footer-cards-num {
   font-weight: 300;
-  font-size: 22px;
+  font-size: 16px;
   line-height: 100%;
   vertical-align: middle;
   color: #fff;
@@ -635,7 +634,7 @@ body.menu-open {
 .footer-cards-title-time {
   font-family: Tenor Sans, sans-serif;
   font-weight: 400;
-  font-size: 28.17px;
+  font-size: 22.17px;
   line-height: 100%;
   vertical-align: middle;
   color: #fff;
@@ -645,7 +644,7 @@ body.menu-open {
 .footer-cards-works-text {
   font-family: Arial;
   font-weight: 400;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 32px;
   vertical-align: middle;
   color: #fff;
@@ -655,7 +654,7 @@ body.menu-open {
 .footer-cards-title-button {
   font-family: Tenor Sans, sans-serif;
   font-weight: 400;
-  font-size: 32px;
+  font-size: 28px;
   line-height: 100%;
   vertical-align: middle;
   color: #fff;
@@ -665,8 +664,8 @@ body.menu-open {
 .footer-cards-adres {
   font-family: Arial;
   font-weight: 400;
-  font-size: 22px;
-  line-height: 32px;
+  font-size: 18px;
+  line-height: 28px;
   vertical-align: middle;
   color: #fff;
   max-width: 421px;
