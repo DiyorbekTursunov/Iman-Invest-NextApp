@@ -905,7 +905,7 @@ body.menu-open {
     align-items: center;
   }
   .hero__shape {
-    width: 100%;
+    width: 70%;
     margin: 0;
     left: auto;
     right: auto;
@@ -925,7 +925,7 @@ body.menu-open {
   .haro__container {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 0px;
     padding: 0 12px;
   }
   .hero_bottom {
@@ -1331,6 +1331,9 @@ body.menu-open {
   .mobile-menu__nav-link {
     font-size: 1.2rem;
     padding: 1.2rem 1.5rem;
+  }
+  .hero__shape {
+    width: 100%;
   }
 }
 @media (max-width: 365px) {
