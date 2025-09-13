@@ -208,7 +208,7 @@ body.menu-open {
   padding-top: 49px;
 }
 .haro__container {
-  border: 4px red solid;
+  /* border: 4px red solid; */
   max-width: 1160px;
   padding: 0 20px;
   display: flex;
