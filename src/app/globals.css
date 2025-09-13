@@ -497,7 +497,7 @@ body.menu-open {
 
 .form__inp,
 .form__massage {
-    font-family: sans-serif;
+  font-family: sans-serif;
   width: 100%;
   padding: 3px 3px 17px;
   border: none;
@@ -507,9 +507,9 @@ body.menu-open {
   color: #363636;
 }
 
-.form__inp::placeholder{
-    font-size: 14.64px;
-    font-family: sans-serif;
+.form__inp::placeholder {
+  font-size: 14.64px;
+  font-family: sans-serif;
 }
 
 .form__inp::placeholder {
@@ -693,7 +693,7 @@ body.menu-open {
 }
 
 .footer-cards-img {
-    max-width: 600px;
+  max-width: 600px;
   /* opacity: 0.3; */
   position: absolute;
   right: 0;
@@ -768,7 +768,7 @@ body.menu-open {
   /* .form__sec-text {
     font-size: 20px;
   } */
-/*
+  /*
   .form__sec-title {
     font-size: 35px;
   } */
@@ -896,10 +896,31 @@ body.menu-open {
     gap: 35px;
     margin-bottom: 31px;
   }
-  .hero__signature,
-  .hero__shape,
-  .hero__img {
+  .hero__signature {
     display: none;
+  }
+  .haro__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero__shape {
+    width: 100%;
+    margin: 0;
+    left: auto;
+    right: auto;
+    top: auto;
+    margin-bottom: -50px;
+    /* position: relative; */
+    z-index: 0;
+  }
+  .hero__img {
+    max-width: 334px;
+    margin: 0;
+    left: auto;
+    margin-bottom: -110px;
+    z-index: 1;
+    /* display: none; */
   }
   .haro__container {
     display: flex;
@@ -937,6 +958,8 @@ body.menu-open {
     line-height: 27px;
     font-family: Tenor Sans, sans-serif;
     font-weight: 400;
+    position: relative;
+    z-index: 5;
   }
 
   .hero__mob-bottom-text {

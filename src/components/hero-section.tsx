@@ -10,7 +10,7 @@ export function HeroSection() {
   const formatText = (text: string) => {
     return text.split("\n").map((line, index) => (
       <span key={index}>
-        {line}  
+        {line}
         {index < text.split("\n").length - 1 && <br />}
       </span>
     ));
@@ -53,13 +53,13 @@ export function HeroSection() {
           loading="lazy"
         />
         <div className="hero_bottom">
-          <Image
+          {/* <Image
             src="/img/heroMob.avif"
             alt="Hero"
             width={459}
             height={418}
             className="hero__mob-img"
-          />
+          /> */}
           <div className="hero__mob-bottom">
             {/* <Image
             src="/img/signature.avif"
