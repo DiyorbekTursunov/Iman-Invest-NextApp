@@ -662,10 +662,23 @@ body.menu-open {
 }
 
 .footer-cards-adres {
-  font-family: Arial;
+  font-family: sans-serif;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 16px;
+  line-height: 23px;
+  vertical-align: middle;
+  color: #fff;
+  max-width: 421px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.footer-cards-adres2 {
+  display: none;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
   vertical-align: middle;
   color: #fff;
   max-width: 421px;
@@ -676,6 +689,11 @@ body.menu-open {
 .footer-cards-adres:hover {
   color: #ff8562;
 }
+
+.footer-cards-adres2:hover {
+  color: #ff8562;
+}
+
 
 .footer-button-cards {
   margin-bottom: 80px;
@@ -1061,6 +1079,11 @@ body.menu-open {
   .footer-cards-num,
   .footer-cards-adres {
     font-size: 18.44px;
+    display: none;
+  }
+
+  .footer-cards-adres2 {
+    display: inline-block;
   }
 
   .footer-cards-button .footer-cards-adres {

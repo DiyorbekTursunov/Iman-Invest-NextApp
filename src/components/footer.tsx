@@ -150,6 +150,14 @@ export function Footer() {
               __html: t.footer.address.text.replace(/\n/g, "<br />"),
             }}
           />
+                    <a
+            href="#"
+            className="footer-cards-adres2"
+
+            dangerouslySetInnerHTML={{
+              __html: t.footer.address.text2,
+            }}
+          />
         </div>
         <p className="footer-cards-button">{formatText(t.footer.copyright)}</p>
 

@@ -55,6 +55,7 @@ export interface Translations {
     address: {
       title: string;
       text: string;
+      text2: string;
     };
     copyright: string;
   };
@@ -71,8 +72,8 @@ export const translations: Record<Language, Translations> = {
       language: "Uz",
     },
     hero: {
-      title: "Rustam Rahmatov murojaati",
-      text: "IMAN'da biz nafaqat innovatsion moliyaviy mahsulotlar yaratishga, balki bizga ishonch bildirgan har bir inson bilan shaffof va halol munosabatlar o'rnatishga intilamiz. Bizning jamoamiz o'z sohasining mutaxassislari Rustam Rahmatov portali, men ularga chuqur ishonaman va hurmat qilaman. Shu bilan birga, shaxsiy e'tiborimni talab qiladigan vaziyatlar uchun men alohida aloqa kanalini ochishga qaror qildim.\n\nBizning ishonchimiz komilki, uzoq muddatli muvaffaqiyat faqat halollik, ishonch va mas'uliyat tamoyillariga asoslangan holda erishilishi mumkin. Men shaxsan IMAN faoliyati ushbu qadriyatlar va kompaniya missiyasiga — axloqiy moliya tizimini rivojlantirishga — doimo mos bo'lishini ta'minlayman.\n\nAgar siz ushbu tamoyillar buzilgan deb hisoblasangiz yoki biz bilan muloqot jarayonida adolatsizlikka duch kelgan bo'lsangiz, iltimos, quyidagi havola orqali shaklni to'ldirib bizga xabar bering.",
+      title: "Rustam Rahmatov portali",
+      text: "IMAN'da biz nafaqat innovatsion moliyaviy mahsulotlar yaratishga, balki bizga ishonch bildirgan har bir inson bilan Adolatli va shaffof va halol munosabatlar o'rnatishga intilamiz. Bizning jamoamiz o'z sohasining Ma’sul mutaxassislari, men ularga chuqur ishonaman va hurmat qilaman. Shu bilan birga, shaxsiy e'tiborimni talab qiladigan vaziyatlar uchun men alohida aloqa kanalini ochishga qaror qildim.\n\nBizning ishonchimiz komilki, uzoq muddatli muvaffaqiyat faqat halollik, ishonch va mas'uliyat tamoyillariga asoslangan holda erishilishi mumkin. Men shaxsan IMAN faoliyati ushbu qadriyatlar va kompaniya missiyasiga — axloqiy moliya tizimini rivojlantirishga — doimo mos bo'lishini ta'minlayman.\n\nAgar siz ushbu tamoyillar buzilgan deb hisoblasangiz yoki biz bilan muloqot jarayonida adolatsizlikka duch kelgan bo'lsangiz, iltimos, quyidagi havola orqali shaklni to'ldirib bizga xabar bering.",
       signature: {
         name: "Rahmatov Rustam",
         position: "Founder & CEO",
@@ -81,7 +82,7 @@ export const translations: Record<Language, Translations> = {
     form: {
       title: "Murojaatingizni yuboring",
       description:
-        "Har bir murojaatni shaxsan ko'rib chiqishga kafolat beraman.\n\nP.S. Iltimos, faqat mazmunli murojaatlar bilan murojaat qiling.\n\nIsh faoliyatiga aloqasi bo'lmagan xabarlar ko'rib chiqilmaydi.\n\nHurmat bilan,\n<b>Rustam Rahmatov</b>\n\nIMAN hammuassisi va bosh direktori",
+        "Har bir murojaatni shaxsan ko'rib chiqishga kafolat beraman.\n\nP.S. Iltimos, faqat mazmunli murojaatlar bilan murojaat qiling.\n\nIsh faoliyatiga aloqasi bo'lmagan xabarlar ko'rib chiqilmaydi.\n\nHurmat bilan,\n<b>Rustam Rahmatov</b>\n\nIMAN Asoschisi va bosh direktori",
       tabs: {
         client: "Mijoz",
         company: "Kompaniya",
@@ -117,7 +118,8 @@ export const translations: Record<Language, Translations> = {
       },
       address: {
         title: "Manzil",
-        text: "Toshkent shahri, Mirobod tumani, Oybek MFY, <br/> Shaxrisabz ko'chasi, 16-uy",
+        text: "Toshkent shahri, Mirobod tumani, Oybek MFY, <br/> Shaxrisabz ko'chasi, 16",
+        text2:"Toshkent shahri, Mirobod tumani, Oybek MFY, Shaxrisabz ko'chasi, 16",
       },
       copyright: "© IMAN Group Ltd.\nBarcha huquqlar himoyalangan.",
     },
