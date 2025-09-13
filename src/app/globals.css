@@ -743,7 +743,15 @@ body.menu-open {
     left: -40px;
   }
   .hero__shape {
-    right: -100px;
+    display: flex;
+    position: absolute;
+    max-width: 670px;
+    /* height: 600px; */
+    width: 100%;
+    object-fit: contain;
+    /* right: -160px; */
+    bottom: -210px;
+    left: 580px;
   }
 }
 /* @media (max-width: 1500px) {
