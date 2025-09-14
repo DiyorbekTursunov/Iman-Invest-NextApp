@@ -119,7 +119,8 @@ export const translations: Record<Language, Translations> = {
       address: {
         title: "Manzil",
         text: "Toshkent shahri, Mirobod tumani, Oybek MFY, <br/> Shaxrisabz ko'chasi, 16",
-        text2:"Toshkent shahri, Mirobod tumani, Oybek MFY, Shaxrisabz ko'chasi, 16",
+        text2:
+          "Toshkent shahri, Mirobod tumani, Oybek MFY, Shaxrisabz ko'chasi, 16",
       },
       copyright: "© IMAN Group Ltd.\nBarcha huquqlar himoyalangan.",
     },
@@ -181,6 +182,7 @@ export const translations: Record<Language, Translations> = {
       address: {
         title: "Адрес",
         text: "г. Ташкент, Мирабадский район, МФЯ Ойбек, <br/> ул. Шахрисабз, дом 16",
+        text2: "г. Ташкент, Мирабадский район, МФЯ Ойбек, ул. Шахрисабз, дом 16",
       },
       copyright: "© IMAN Group Ltd.\nВсе права защищены.",
     },
@@ -243,6 +245,7 @@ export const translations: Record<Language, Translations> = {
       address: {
         title: "Address",
         text: "Tashkent city, Mirobod district, Oybek MFY, <br/> Shakhrisabz street, building 16",
+        text2: "Tashkent city, Mirobod district, Oybek MFY, Shakhrisabz street, building 16",
       },
       copyright: "© IMAN Group Ltd.\nAll rights reserved.",
     },
