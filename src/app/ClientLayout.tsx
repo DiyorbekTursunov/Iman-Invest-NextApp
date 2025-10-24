@@ -54,7 +54,8 @@ export function ContactForms() {
       if (!res.ok) throw new Error(await res.text());
       setShowSuccessModal(true);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : String(err);
+      const msg =
+        err instanceof Error ? err.message : typeof err === "string" ? err : "Unknown error";
       console.error("Lead send error:", msg);
       setErrorText(msg);
     } finally {
