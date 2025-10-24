@@ -1,125 +1,141 @@
 "use client";
 
 import type React from "react";
-
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { useLanguage } from "@/hooks/use-language";
 import { usePhoneFormatting } from "@/hooks/use-phone-formatting";
 import { SuccessModal } from "./success-modal";
 
-const MIJOZ_SHEET_URL =
-  "https://script.google.com/macros/s/AKfycbzI9SlyQHdeYp8g2E0dN6UxKXtXgxJYJIBszVYFWa5IJszhboH_VCzYdBYOHgaiMLg2/exec";
-const KOMPANIYA_SHEET_URL =
-  "https://script.google.com/macros/s/AKfycbzgMQEdNq8NkQ1l1xoJElvTbklFveOwSuTcTxqwwT0AmBZ5nduoDfwa8hYwjp5RXsbE/exec";
+type ClientPayload = {
+  kind: "client";
+  name: string;
+  phone?: string;
+  email: string;
+  docNumber?: string;
+  subject: string;
+  message: string;
+};
+
+type CompanyPayload = {
+  kind: "company";
+  companyName: string;
+  companyInn?: string;
+  clientName: string;
+  phone?: string;
+  email: string;
+  docNumber?: string;
+  subject: string;
+  message: string;
+};
+
+const API_URL = "/api/leads";
 
 export function ContactForms() {
   const { t } = useLanguage();
   const [activeForm, setActiveForm] = useState<"mijoz" | "kompaniya">("mijoz");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorText, setErrorText] = useState<string | null>(null);
+
   const mijozFormRef = useRef<HTMLFormElement>(null);
   const kompaniyaFormRef = useRef<HTMLFormElement>(null);
 
   usePhoneFormatting();
 
-  const formatText = (text: string) => {
-    return text.split("\n").map((line, index) => (
-      <span key={index}>
-        {line}
-        {index < text.split("\n").length - 1 && <br />}
-      </span>
-    ));
+  const postLead = async (payload: ClientPayload | CompanyPayload) => {
+    setSubmitting(true);
+    setErrorText(null);
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      setShowSuccessModal(true);
+    } catch (e: any) {
+      console.error("Lead send error:", e);
+      setErrorText(e?.message || "Xatolik yuz berdi");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleMijozSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const form = e.currentTarget;
-    const formData = new FormData(form);
+    const fd = new FormData(form);
 
-    setTimeout(() => {
-      form.reset();
-      setShowSuccessModal(true);
-    }, 1000);
+    const payload: ClientPayload = {
+      kind: "client",
+      name: String(fd.get("ism") || ""),
+      phone: String(fd.get("telefon") || ""),
+      email: String(fd.get("email") || ""),
+      docNumber: String(fd.get("hujjat") || ""),
+      subject: String(fd.get("mavzu") || ""),
+      message: String(fd.get("xabar") || ""),
+    };
 
-    try {
-      const data = {
-        ism: formData.get("ism"),
-        "telefon raqam": formData.get("telefon"),
-        Email: formData.get("email"),
-        "Hujjat raqami": formData.get("hujjat"),
-        Mavzu: formData.get("mavzu"),
-        Xabar: formData.get("xabar"),
-      };
-
-      await fetch(MIJOZ_SHEET_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams(data as Record<string, string>),
-      });
-    } catch (error) {
-      console.error("Error submitting mijoz form:", error);
-    }
+    await postLead(payload);
+    form.reset();
   };
 
   const handleKompaniyaSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const form = e.currentTarget;
-    const formData = new FormData(form);
+    const fd = new FormData(form);
 
+    const payload: CompanyPayload = {
+      kind: "company",
+      companyName: String(fd.get("kompaniya_nomi") || ""),
+      companyInn: String(fd.get("kompaniya_inn") || ""),
+      clientName: String(fd.get("mijoz_ism") || ""),
+      phone: String(fd.get("telefon") || ""),
+      email: String(fd.get("email") || ""),
+      docNumber: String(fd.get("hujjat") || ""),
+      subject: String(fd.get("mavzu") || ""),
+      message: String(fd.get("xabar") || ""),
+    };
+
+    await postLead(payload);
     form.reset();
-    setShowSuccessModal(true);
-
-    try {
-      const data = {
-        "Kompaniya Nomi": formData.get("kompaniya_nomi"),
-        "Kompaniy INNsi": formData.get("kompaniya_inn"),
-        "Mijoz ism-sharfi": formData.get("mijoz_ism"),
-        "Telefon raqam": formData.get("telefon"),
-        Email: formData.get("email"),
-        "Hujjat raqami": formData.get("hujjat"),
-        Mavzu: formData.get("mavzu"),
-        Xabar: formData.get("xabar"),
-      };
-
-      await fetch(KOMPANIYA_SHEET_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams(data as Record<string, string>),
-      });
-    } catch (error) {
-      console.error("Error submitting kompaniya form:", error);
-    }
   };
 
   return (
     <section className="form__sec" id="contact">
       <div className="form__sec-container">
         <div className="form__sec-left">
-          <h2 className="form__sec-title" dangerouslySetInnerHTML={{ __html: t.form.title }} />
-          <p className="form__sec-text" dangerouslySetInnerHTML={{ __html: t.form.description.split('\n').join('<br/>') }} />
+          <h2
+            className="form__sec-title"
+            dangerouslySetInnerHTML={{ __html: t.form.title }}
+          />
+          <p
+            className="form__sec-text"
+            dangerouslySetInnerHTML={{
+              __html: t.form.description.split("\n").join("<br/>"),
+            }}
+          />
         </div>
+
         <div className="form__sec-right">
           <div className="form-btns">
             <button
+              type="button"
               className={`form__change-btn ${
                 activeForm === "mijoz" ? "active" : ""
               }`}
               onClick={() => setActiveForm("mijoz")}
+              aria-pressed={activeForm === "mijoz"}
             >
               {t.form.tabs.client}
             </button>
             <button
+              type="button"
               className={`form__change-btn ${
                 activeForm === "kompaniya" ? "active" : ""
               }`}
               onClick={() => setActiveForm("kompaniya")}
+              aria-pressed={activeForm === "kompaniya"}
             >
               {t.form.tabs.company}
             </button>
@@ -130,6 +146,7 @@ export function ContactForms() {
             ref={mijozFormRef}
             className={`form_client ${activeForm === "mijoz" ? "active" : ""}`}
             onSubmit={handleMijozSubmit}
+            noValidate
           >
             <input
               className="form__inp"
@@ -157,7 +174,6 @@ export function ContactForms() {
               type="text"
               name="hujjat"
               placeholder={t.form.fields.documentNumber}
-              required
             />
             <input
               className="form__inp"
@@ -172,9 +188,16 @@ export function ContactForms() {
               placeholder={t.form.fields.message}
               required
             />
-            <button className="form__btn" type="submit">
-              <span className="btn-text">{t.form.submit}</span>
+            <button className="form__btn" type="submit" disabled={submitting}>
+              <span className="btn-text">
+                {submitting ? t.form.sending ?? "Yuborilmoqda..." : t.form.submit}
+              </span>
             </button>
+            {errorText && (
+              <p className="form__error" role="alert" style={{ marginTop: 8 }}>
+                {errorText}
+              </p>
+            )}
           </form>
 
           {/* Company Form */}
@@ -184,6 +207,7 @@ export function ContactForms() {
               activeForm === "kompaniya" ? "active" : ""
             }`}
             onSubmit={handleKompaniyaSubmit}
+            noValidate
           >
             <input
               className="form__inp"
@@ -197,7 +221,6 @@ export function ContactForms() {
               type="text"
               name="kompaniya_inn"
               placeholder={t.form.fields.companyInn}
-              required
             />
             <input
               className="form__inp"
@@ -225,7 +248,6 @@ export function ContactForms() {
               type="text"
               name="hujjat"
               placeholder={t.form.fields.documentNumber}
-              required
             />
             <input
               className="form__inp"
@@ -240,13 +262,23 @@ export function ContactForms() {
               placeholder={t.form.fields.message}
               required
             />
-            <button className="form__btn" type="submit">
-              <span className="btn-text">{t.form.submit}</span>
+            <button className="form__btn" type="submit" disabled={submitting}>
+              <span className="btn-text">
+                {submitting ? t.form.sending ?? "Yuborilmoqda..." : t.form.submit}
+              </span>
             </button>
+            {errorText && (
+              <p className="form__error" role="alert" style={{ marginTop: 8 }}>
+                {errorText}
+              </p>
+            )}
           </form>
         </div>
 
-        <p className="form__sec-text-bottom" dangerouslySetInnerHTML={{ __html: t.form.footer }}></p>
+        <p
+          className="form__sec-text-bottom"
+          dangerouslySetInnerHTML={{ __html: t.form.footer }}
+        />
       </div>
 
       <SuccessModal
