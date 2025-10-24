@@ -149,14 +149,50 @@ export function ContactForms() {
             onSubmit={handleMijozSubmit}
             noValidate
           >
-            <input className="form__inp" type="text" name="ism" placeholder={t.form.fields.clientName} required />
-            <input className="form__inp phone-input" type="tel" name="telefon" placeholder={t.form.fields.phone} required />
-            <input className="form__inp" type="email" name="email" placeholder={t.form.fields.email} required />
-            <input className="form__inp" type="text" name="hujjat" placeholder={t.form.fields.documentNumber} />
-            <input className="form__inp" type="text" name="mavzu" placeholder={t.form.fields.subject} required />
-            <textarea className="form__massage" name="xabar" placeholder={t.form.fields.message} required />
+            <input
+              className="form__inp"
+              type="text"
+              name="ism"
+              placeholder={t.form.fields.clientName}
+              required
+            />
+            <input
+              className="form__inp phone-input"
+              type="tel"
+              name="telefon"
+              placeholder={t.form.fields.phone}
+              required
+            />
+            <input
+              className="form__inp"
+              type="email"
+              name="email"
+              placeholder={t.form.fields.email}
+              required
+            />
+            <input
+              className="form__inp"
+              type="text"
+              name="hujjat"
+              placeholder={t.form.fields.documentNumber}
+            />
+            <input
+              className="form__inp"
+              type="text"
+              name="mavzu"
+              placeholder={t.form.fields.subject}
+              required
+            />
+            <textarea
+              className="form__massage"
+              name="xabar"
+              placeholder={t.form.fields.message}
+              required
+            />
             <button className="form__btn" type="submit" disabled={submitting}>
-              <span className="btn-text">{submitting ? (t.form.sending ?? "Yuborilmoqda...") : t.form.submit}</span>
+              <span className="btn-text">
+                {submitting ? t.form.sending ?? "Yuborilmoqda..." : t.form.submit}
+              </span>
             </button>
             {errorText && (
               <p className="form__error" role="alert" style={{ marginTop: 8 }}>
@@ -168,20 +204,69 @@ export function ContactForms() {
           {/* Company Form */}
           <form
             ref={kompaniyaFormRef}
-            className={`form_company ${activeForm === "kompaniya" ? "active" : ""}`}
+            className={`form_company ${
+              activeForm === "kompaniya" ? "active" : ""
+            }`}
             onSubmit={handleKompaniyaSubmit}
             noValidate
           >
-            <input className="form__inp" type="text" name="kompaniya_nomi" placeholder={t.form.fields.companyName} required />
-            <input className="form__inp" type="text" name="kompaniya_inn" placeholder={t.form.fields.companyInn} />
-            <input className="form__inp" type="text" name="mijoz_ism" placeholder={t.form.fields.clientName} required />
-            <input className="form__inp phone-input" type="tel" name="telefon" placeholder={t.form.fields.phone} required />
-            <input className="form__inp" type="email" name="email" placeholder={t.form.fields.email} required />
-            <input className="form__inp" type="text" name="hujjat" placeholder={t.form.fields.documentNumber} />
-            <input className="form__inp" type="text" name="mavzu" placeholder={t.form.fields.subject} required />
-            <textarea className="form__massage" name="xabar" placeholder={t.form.fields.message} required />
+            <input
+              className="form__inp"
+              type="text"
+              name="kompaniya_nomi"
+              placeholder={t.form.fields.companyName}
+              required
+            />
+            <input
+              className="form__inp"
+              type="text"
+              name="kompaniya_inn"
+              placeholder={t.form.fields.companyInn}
+            />
+            <input
+              className="form__inp"
+              type="text"
+              name="mijoz_ism"
+              placeholder={t.form.fields.clientName}
+              required
+            />
+            <input
+              className="form__inp phone-input"
+              type="tel"
+              name="telefon"
+              placeholder={t.form.fields.phone}
+              required
+            />
+            <input
+              className="form__inp"
+              type="email"
+              name="email"
+              placeholder={t.form.fields.email}
+              required
+            />
+            <input
+              className="form__inp"
+              type="text"
+              name="hujjat"
+              placeholder={t.form.fields.documentNumber}
+            />
+            <input
+              className="form__inp"
+              type="text"
+              name="mavzu"
+              placeholder={t.form.fields.subject}
+              required
+            />
+            <textarea
+              className="form__massage"
+              name="xabar"
+              placeholder={t.form.fields.message}
+              required
+            />
             <button className="form__btn" type="submit" disabled={submitting}>
-              <span className="btn-text">{submitting ? (t.form.sending ?? "Yuborilmoqda...") : t.form.submit}</span>
+              <span className="btn-text">
+                {submitting ? t.form.sending ?? "Yuborilmoqda..." : t.form.submit}
+              </span>
             </button>
             {errorText && (
               <p className="form__error" role="alert" style={{ marginTop: 8 }}>
