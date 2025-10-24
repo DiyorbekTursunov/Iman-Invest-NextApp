@@ -1,77 +1,101 @@
 import type { NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 
-// Nodemailer must run in the Node runtime (not edge)
+// Nodemailer must run in Node runtime (not edge)
 export const runtime = "nodejs";
 
-type LeadBody =
-  | {
-      kind: "client";
-      name: string;
-      phone?: string;
-      email: string;
-      docNumber?: string;
-      subject: string;
-      message: string;
-    }
-  | {
-      kind: "company";
-      companyName: string;
-      companyInn?: string;
-      clientName: string;
-      phone?: string;
-      email: string;
-      docNumber?: string;
-      subject: string;
-      message: string;
-    };
+// ===== Types =====
+interface CommonFields {
+  phone?: string;
+  email: string;
+  docNumber?: string;
+  subject: string;
+  message: string;
+}
 
-function bad(msg: string, code = 400) {
+export interface ClientLead extends CommonFields {
+  kind: "client";
+  name: string;
+}
+
+export interface CompanyLead extends CommonFields {
+  kind: "company";
+  companyName: string;
+  companyInn?: string;
+  clientName: string;
+}
+
+export type LeadBody = ClientLead | CompanyLead;
+
+// ===== Helpers =====
+function bad(msg: string, code = 400): Response {
   return new Response(msg, { status: code });
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function hasCommonFields(b: unknown): b is CommonFields {
+  if (!isRecord(b)) return false;
+  return (
+    typeof b.email === "string" &&
+    typeof b.subject === "string" &&
+    typeof b.message === "string"
+  );
+}
+
+function isClientLead(b: unknown): b is ClientLead {
+  return hasCommonFields(b) && isRecord(b) && b["kind"] === "client" && typeof b["name"] === "string";
+}
+
+function isCompanyLead(b: unknown): b is CompanyLead {
+  return (
+    hasCommonFields(b) &&
+    isRecord(b) &&
+    b["kind"] === "company" &&
+    typeof b["companyName"] === "string" &&
+    typeof b["clientName"] === "string"
+  );
+}
+
+function buildLines(body: LeadBody): string[] {
+  const out: string[] = [];
+  out.push(`Turi: ${body.kind}`);
+  if (body.kind === "client") {
+    out.push(`Ism-Sharif: ${body.name}`);
+  } else {
+    out.push(`Kompaniya: ${body.companyName}`);
+    if (body.companyInn) out.push(`INN: ${body.companyInn}`);
+    out.push(`Mijoz: ${body.clientName}`);
+  }
+  if (body.phone) out.push(`Telefon: ${body.phone}`);
+  out.push(`Email: ${body.email}`);
+  if (body.docNumber) out.push(`Hujjat raqami: ${body.docNumber}`);
+  out.push("", "Xabar:", body.message);
+  return out;
+}
+
+// ===== Route =====
 export async function POST(req: NextRequest) {
   // Parse body
-  let body: LeadBody;
+  let unknownBody: unknown;
   try {
-    body = (await req.json()) as LeadBody;
+    unknownBody = await req.json();
   } catch {
     return bad("Invalid JSON");
   }
 
-  // Validate required fields
-  const common = (b: any) =>
-    !!b?.subject && !!b?.message && typeof b?.email === "string";
-
-  const valid =
-    (body.kind === "client" && !!(body as any).name && common(body)) ||
-    (body.kind === "company" &&
-      !!(body as any).companyName &&
-      !!(body as any).clientName &&
-      common(body));
-
-  if (!valid) return bad("Missing required fields");
-
-  // Build plain-text email
-  const lines: string[] = [];
-  lines.push(`Turi: ${body.kind}`);
-  if (body.kind === "client") {
-    const b = body as Extract<LeadBody, { kind: "client" }>;
-    lines.push(`Ism-Sharif: ${b.name}`);
+  // Validate
+  let body: LeadBody;
+  if (isClientLead(unknownBody) || isCompanyLead(unknownBody)) {
+    body = unknownBody;
   } else {
-    const b = body as Extract<LeadBody, { kind: "company" }>;
-    lines.push(`Kompaniya: ${b.companyName}`);
-    if (b.companyInn) lines.push(`INN: ${b.companyInn}`);
-    lines.push(`Mijoz: ${b.clientName}`);
+    return bad("Missing required fields");
   }
-  if (body.phone) lines.push(`Telefon: ${body.phone}`);
-  lines.push(`Email: ${body.email}`);
-  if (body.docNumber) lines.push(`Hujjat raqami: ${body.docNumber}`);
-  lines.push("", "Xabar:", body.message);
 
-  // Transporter (Zoho SMTP)
   const transporter = nodemailer.createTransport({
-    host: process.env.ZOHO_HOST || "smtp.zoho.com", // use smtp.zoho.eu/.in if needed
+    host: process.env.ZOHO_HOST || "smtp.zoho.com",
     port: 465,
     secure: true, // 465 = SSL
     auth: {
@@ -80,19 +104,19 @@ export async function POST(req: NextRequest) {
     },
   });
 
-  // Send
   try {
     await transporter.sendMail({
-      from: `"Website Lead" <${process.env.ZOHO_USER}>`, // must be your authenticated Zoho address
-      to: process.env.LEAD_TO!, // e.g. rahmatullohrustam@gmail.com
+      from: `"Website Lead" <${process.env.ZOHO_USER}>`,
+      to: process.env.LEAD_TO!,
       subject: `Lead: ${body.subject}`,
-      text: lines.join("\n"),
-      replyTo: body.email, // reply goes to the visitor
+      text: buildLines(body).join("\n"),
+      replyTo: body.email,
     });
 
     return Response.json({ ok: true });
-  } catch (e: any) {
-    console.error("SMTP error:", e?.message || e);
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : "Unknown SMTP error";
+    console.error("SMTP error:", msg);
     return bad("Email send failed", 500);
   }
 }
